@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="pagina-cadastro-paciente">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicatriza+ - Cadastrar Pacientes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+<div class="sidebar-overlay"></div>
+
+    <div class="layout"> 
+
+        <!-- MENU LATERAL -->
+        <nav class="barra-lateral">
+
+            <div class="logo-box">
+                <img src="img/Logo.svg" class="img-logo">
+            </div>
+
+            <div class="profissional">
+
+                <div class="profissional-icon">
+                    <img src="img/icone_branco.png" alt="Usuário">
+                </div>
+
+                <h3>Maria Silva</h3>
+                <p>Enfermeira COREN(DF)</p>
+
+            </div>
+
+            <ul class="menu">
+
+                <li>
+                    <a href="paginainicial.html">
+                        <img src="img/Icon_AreaTrabalho.svg" alt="">
+                        <span>Área de trabalho</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="img/Icon_CadastrarPaciente.svg" alt="">
+                        <span>Cadastrar paciente</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="painelpaciente.html">
+                        <img src="img/Icon_MeusPacientes.svg" alt="">
+                        <span>Meus pacientes</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="sidebar-footer">
+
+                <a href="configuracoes.html" class="menu-btn">
+                    <img src="img/Icon_Config.svg" alt="">
+                    <span>Configurações</span>
+                </a>
+
+                <a href="login.html" class="menu-btn">
+                    <img src="img/Icon_Sair.svg" alt="">
+                    <span>Sair da conta</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+
+         <!-- CONTEÚDO -->
+    <main class="content">
+
+        <section class="page-header">
+
+            <a href="#" class="action-card">
+
+                <img src="img/User.png" alt="Cadastrar paciente">
+
+                <div>
+                    <h1>Cadastrar paciente</h1>
+                    <p>
+                        Registre um novo paciente e inicie o
+                        acompanhamento de feridas
+                    </p>
+                </div>
+
+
+            </a>
+
+        </section>
+
+        <form class="patient-form">
+           
+            <div class="grid1">
+            <div class="field double">
+                <label>Nome completo</label>
+                <input type="text" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="field double">
+                <label>Leito</label>
+                <input type="text" placeholder="Ex: 12-A">
+            </div>
+
+            <div class="field">
+                <label>Natural de</label>
+                <input type="text" placeholder="Ex: São Paulo">
+            </div>
+
+            <div class="field double">
+                <label>Endereço</label>
+                <input type="text" placeholder="Rua, número, bairro">
+            </div>
+             
+            <div class="field">
+                <label>CEP</label>
+                <input type="text" placeholder="00000-000">
+            </div>
+
+            <div class="field double">
+                <label>E-mail</label>
+                <input type="email" placeholder="Exemplo@gmail.com">
+            </div>
+
+            <div class="field">
+                <label>Telefone/Whatsapp</label>
+                <input type="text" placeholder="Ex: (61)99999-9999">
+            </div>
+
+            <div class="field">
+                <label>Prontuário</label>
+                <input type="text" placeholder="N° do prontuário">
+            </div>
+
+            </div>
+
+            <div class="grid2">
+
+            <div class="field">
+                <label for="data-cadastro">Data do cadastro</label>
+                <input id="data-cadastro" type="date">
+            </div>
+
+            <div class="field">
+                <label for="nascimento">Nascimento</label>
+                <input id="nascimento" type="date">
+            </div>
+
+            <div class="field">
+                <label for="numero-filhos">Número de filhos</label>
+                <input id="numero-filhos" type="number" min="0" max="10" placeholder="0">
+            </div>
+
+             <div class="field">
+                <label for="pessoas-residem">Pessoas que residem juntas</label>
+                <input id="pessoas-residem" type="number" min="0" max="10" placeholder="0">
+            </div>
+
+            </div>
+
+            <div class="grid3">
+
+            <div class="field select">
+                <label for="escolaridade">Escolaridade</label>
+                <select id="escolaridade" name="escolaridade">
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="educacaobasica">Educação Básica</option>
+                    <option value="ensinomedio">Ensino Médio</option>
+                    <option value="graduacao">Graduação</option>
+                    <option value="posgraduacao">Pós-Graduação</option>
+                    
+                </select>
+                
+            </div>
+
+            <div class="field select">
+                <label for="genero">Gênero</label>
+                <select id="genero" name="genero">
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="masculino">Masculino (Homem)</option>
+                    <option value="feminino">Feminino (Mulher)</option>
+                    <option value="nao-binario">Não-binário</option>
+                    <option value="lgbtqia+">LGBTQIA+ (Gay, Lésbica...)</option>
+                    <option value="bissexual">Bissexual</option>
+                    <option value="assexual">Assexual</option>
+                    <option value="prefiro-nao-responder">Prefiro não responder</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="field select">
+               <label for="moradia">Tipo de Moradia</label>
+                <select id="moradia" name="moradia">
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="alugado">Alugado</option>
+                    <option value="financiado">Financiado</option>
+                    <option value="proprio">Próprio</option>
+                    <option value="cedido">Cedido</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="field select">
+                <label for="estado-civil">Estado civil</label>
+                <select id="estado-civil" name="estado-civil">
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="solteiro">Solteiro(a)</option>
+                    <option value="casado">Casado(a)</option>
+                    <option value="divorciado">Divorciado(a)</option>
+                    <option value="viuvo">Viúvo(a)</option>
+                    <option value="separado">Separado(a)</option>
+                    <option value="uniao-estavel">União estável</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            </div>
+
+            <div class="grid4">
+            
+            <div class="field">
+                <label>Renda familiar</label>
+                <input type="text" placeholder="Ex: R$ 4.500,00">
+            </div>
+
+            <div class="field">
+                <label>Ocupação</label>
+                <input type="text" placeholder="Ex: Arquiteto">
+            </div>
+
+            <div class="field double">
+                <label>Médico titular</label>
+                <input type="text" placeholder="Ex: João da Silva Santos">
+            </div>
+
+            </div>
+
+        </form>
+
+        <section class="form-footer">
+
+            <div class="stepper">
+
+                <div class="step-line">
+                    <span class="active"></span>
+                </div>
+
+                <div class="step-dots">
+                    <span></span>
+                    <span class="active"></span>
+                </div>
+
+            </div>
+
+            <button type="button" class="btn-next" onclick="location.href='paciente.html'">
+            CONTINUAR
+            </button>
+        </section>
+
+    </main>
+
+    </div>
+
+<script>(function(){var b=document.querySelector('.hamburger'),s=document.querySelector('.barra-lateral'),o=document.querySelector('.sidebar-overlay');if(!b    
