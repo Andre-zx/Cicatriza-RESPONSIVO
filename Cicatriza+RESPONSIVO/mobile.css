@@ -1,0 +1,855 @@
+/* =========================================================
+   CICATRIZA+ — RESPONSIVIDADE IPHONE 14 (390 × 844)
+   Adicione no <head> de todos os HTMLs:
+   <link rel="stylesheet" href="mobile.css">
+   ========================================================= */
+
+/* ─── RESET HORIZONTAL SCROLL ─── */
+* {
+    max-width: 100%;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   HAMBURGUER + OVERLAY — páginas com barra lateral
+   (pagina-inicial, pagina-cadastro-paciente,
+    pagina-painel-paciente, pagina-configuracoes,
+    pagina-relatorio-paciente, pagina-formulario-avaliacao,
+    pagina-formulario-paciente)
+   ========================================================= */
+
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    background: #008276;
+    border: none;
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: .25s;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 900;
+}
+
+@media (max-width: 430px) {
+
+    /* ─── HAMBURGUER VISÍVEL ─── */
+    .hamburger {
+        display: flex;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    /* ─── LAYOUT: empilhar sidebar + conteúdo ─── */
+    html.pagina-inicial .layout,
+    html.pagina-cadastro-paciente .layout,
+    html.pagina-painel-paciente .layout,
+    html.pagina-configuracoes .layout,
+    html.pagina-relatorio-paciente .layout,
+    html.pagina-formulario-avaliacao .layout,
+    html.pagina-formulario-paciente .layout {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    /* ─── SIDEBAR: gaveta lateral ─── */
+    html.pagina-inicial .barra-lateral,
+    html.pagina-cadastro-paciente .barra-lateral,
+    html.pagina-painel-paciente .barra-lateral,
+    html.pagina-configuracoes .barra-lateral,
+    html.pagina-relatorio-paciente .barra-lateral,
+    html.pagina-formulario-avaliacao .barra-lateral,
+    html.pagina-formulario-paciente .barra-lateral {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        width: 260px;
+        height: 100vh;
+        z-index: 1000;
+        overflow-y: auto;
+        transition: left .28s cubic-bezier(.4,0,.2,1);
+        box-shadow: 4px 0 20px rgba(0,0,0,.15);
+    }
+
+    html.pagina-inicial .barra-lateral.open,
+    html.pagina-cadastro-paciente .barra-lateral.open,
+    html.pagina-painel-paciente .barra-lateral.open,
+    html.pagina-configuracoes .barra-lateral.open,
+    html.pagina-relatorio-paciente .barra-lateral.open,
+    html.pagina-formulario-avaliacao .barra-lateral.open,
+    html.pagina-formulario-paciente .barra-lateral.open {
+        left: 0;
+    }
+
+    /* ─── CONTEÚDO: padding top para não ficar atrás do hamburguer ─── */
+    html.pagina-inicial .content,
+    html.pagina-cadastro-paciente .content,
+    html.pagina-painel-paciente .content,
+    html.pagina-configuracoes .content,
+    html.pagina-relatorio-paciente .content,
+    html.pagina-formulario-avaliacao .content,
+    html.pagina-formulario-paciente .content {
+        padding-top: 70px !important;
+    }
+
+    /* ─── LOGO BOX na sidebar ─── */
+    .logo-box {
+        margin: 16px auto !important;
+    }
+
+    .img-logo {
+        width: 120px !important;
+        height: auto !important;
+    }
+
+
+    /* =========================================================
+       LANDING PAGE  (index.html)
+       ========================================================= */
+
+    html.pagina-landing-page .container-navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        gap: 14px;
+    }
+
+    html.pagina-landing-page img {
+        width: 120px;
+    }
+
+    html.pagina-landing-page nav ul {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    html.pagina-landing-page nav li {
+        min-width: 100px;
+    }
+
+    html.pagina-landing-page nav a {
+        font-size: 13px;
+    }
+
+    html.pagina-landing-page .container-main {
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    html.pagina-landing-page .img-landing {
+        flex: 0 0 100%;
+        max-height: 300px;
+        object-fit: contain;
+        object-position: bottom;
+        display: block;
+        position: relative;
+        z-index: 1;
+        filter: drop-shadow(0 8px 32px rgba(0,0,0,0.2));
+    }
+
+    /* bolha atrás da enfermeira */
+    html.pagina-landing-page .container-main::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 50%, transparent 75%);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    html.pagina-landing-page .container-main-text {
+        flex: 0 0 100%;
+        padding: 30px 20px;
+    }
+
+    html.pagina-landing-page main h1 {
+        font-size: 28px;
+        margin: 16px 0;
+    }
+
+    html.pagina-landing-page main p {
+        font-size: 15px;
+    }
+
+    html.pagina-landing-page .funcionalidades {
+        padding: 40px 0;
+    }
+
+    html.pagina-landing-page .funcionalidades h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+        padding: 0 16px;
+    }
+
+    html.pagina-landing-page .cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 16px;
+    }
+
+    html.pagina-landing-page .card {
+        padding: 20px;
+    }
+
+    html.pagina-landing-page .card img {
+        height: 180px;
+    }
+
+    html.pagina-landing-page .card h3 {
+        font-size: 18px;
+    }
+
+    html.pagina-landing-page .contato {
+        padding: 30px 16px;
+    }
+
+    html.pagina-landing-page .conteudo {
+        align-items: center;
+        flex-direction: column;
+        gap: 24px;
+        padding-right: 0;
+    }
+
+    html.pagina-landing-page .contato-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    html.pagina-landing-page .contato-info h2 {
+        font-size: 26px;
+    }
+
+    html.pagina-landing-page .contato-info > p {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    html.pagina-landing-page .contato-form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 24px 16px;
+    }
+
+    html.pagina-landing-page .contato-form h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    html.pagina-landing-page .row {
+        flex-direction: column;
+    }
+
+    html.pagina-landing-page .field {
+        margin-bottom: 14px;
+    }
+
+    html.pagina-landing-page footer {
+        font-size: 12px;
+        padding: 18px;
+    }
+
+
+    /* =========================================================
+       LOGIN  (login.html)
+       ========================================================= */
+
+    /* login usa class no <body>, não no <html> */
+    html.pagina-login body,
+    body.pagina-login {
+        padding: 20px 16px;
+        padding-top: 40px;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #0d9488;
+    }
+
+    html.pagina-login .login-container,
+    body.pagina-login .login-container {
+        padding: 40px 20px;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 360px;
+        background: #fff;
+        box-shadow: 0 10px 25px rgba(0,0,0,.15);
+        text-align: center;
+    }
+
+    html.pagina-login img,
+    body.pagina-login img {
+        width: 80px;
+        height: 80px;
+    }
+
+    html.pagina-login .subtitle,
+    body.pagina-login .subtitle {
+        font-size: 13px;
+    }
+
+    html.pagina-login .btn,
+    body.pagina-login .btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    html.pagina-login .input-group,
+    body.pagina-login .input-group {
+        margin-bottom: 14px;
+        text-align: left;
+    }
+
+    html.pagina-login .input-group input,
+    body.pagina-login .input-group input {
+        width: 100%;
+        font-size: 15px;
+    }
+
+
+    /* =========================================================
+       CADASTRO PROFISSIONAL  (cadastro.html)
+       ========================================================= */
+
+    html.pagina-cadastro body {
+        padding: 20px 16px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+
+    html.pagina-cadastro .register-container {
+        padding: 24px 16px;
+    }
+
+    html.pagina-cadastro .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    html.pagina-cadastro .user-icon-badge .logo-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    html.pagina-cadastro .register-header h2 {
+        font-size: 17px;
+    }
+
+    html.pagina-cadastro .btn-submit {
+        font-size: 14px;
+    }
+
+
+    /* =========================================================
+       PÁGINA INICIAL / DASHBOARD  (paginainicial.html)
+       ========================================================= */
+
+    html.pagina-inicial .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-inicial .welcome h1 {
+        font-size: 22px;
+    }
+
+    html.pagina-inicial .welcome p {
+        font-size: 15px;
+    }
+
+    html.pagina-inicial .stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin: 24px 0;
+    }
+
+    html.pagina-inicial .stat-card {
+        padding: 20px;
+    }
+
+    html.pagina-inicial .stat-card strong {
+        font-size: 24px;
+    }
+
+    html.pagina-inicial .actions {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    html.pagina-inicial .action-card {
+        gap: 14px;
+        padding: 18px;
+    }
+
+    html.pagina-inicial .action-card > img {
+        width: 44px;
+    }
+
+    html.pagina-inicial .action-card h2 {
+        font-size: 16px;
+    }
+
+    html.pagina-inicial .activity h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    html.pagina-inicial .activity-card {
+        gap: 12px;
+        padding: 14px;
+        flex-wrap: wrap;
+    }
+
+
+    /* =========================================================
+       CADASTRO PACIENTE  (cadastropaciente.html)
+       ========================================================= */
+
+    html.pagina-cadastro-paciente .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-cadastro-paciente .action-card {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 14px 16px;
+        gap: 14px;
+    }
+
+    html.pagina-cadastro-paciente .action-card > img {
+        width: 44px;
+    }
+
+    html.pagina-cadastro-paciente .action-card h1 {
+        font-size: 17px;
+    }
+
+    html.pagina-cadastro-paciente .patient-form {
+        margin: 0;
+        gap: 16px;
+    }
+
+    html.pagina-cadastro-paciente .patient-form > div {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-cadastro-paciente .field.full,
+    html.pagina-cadastro-paciente .field.double {
+        grid-column: auto;
+    }
+
+    html.pagina-cadastro-paciente .field input,
+    html.pagina-cadastro-paciente .field select {
+        font-size: 15px;
+        height: 46px;
+    }
+
+    html.pagina-cadastro-paciente .form-footer {
+        margin: 20px 0;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    html.pagina-cadastro-paciente .btn-next {
+        font-size: 17px;
+        padding: 14px 24px;
+    }
+
+    html.pagina-cadastro-paciente .step-line {
+        width: 200px;
+    }
+
+
+    /* =========================================================
+       PAINEL PACIENTE  (painelpaciente.html)
+       ========================================================= */
+
+    html.pagina-painel-paciente .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-painel-paciente .search-area h1 {
+        font-size: 22px;
+        margin: 0 0 12px 0;
+    }
+
+    html.pagina-painel-paciente .search-box {
+        margin: 0 0 16px 0;
+    }
+
+    html.pagina-painel-paciente .filters {
+        margin: 0 0 16px 0;
+        padding: 16px;
+    }
+
+    html.pagina-painel-paciente .filter-options {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    html.pagina-painel-paciente .patients-list {
+        margin: 0;
+    }
+
+    html.pagina-painel-paciente .patient-card {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    html.pagina-painel-paciente .patient-card a {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+
+    /* =========================================================
+       CONFIGURAÇÕES  (configuracoes.html)
+       ========================================================= */
+
+    html.pagina-configuracoes .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-configuracoes .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    html.pagina-configuracoes .settings-card {
+        padding: 24px 16px;
+        margin-top: 24px;
+    }
+
+    html.pagina-configuracoes .settings-form {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    html.pagina-configuracoes .field.full {
+        grid-column: auto;
+    }
+
+    html.pagina-configuracoes .btn-save {
+        grid-column: auto;
+        font-size: 1.1rem;
+    }
+
+    html.pagina-configuracoes .settings-card h2 {
+        font-size: 1.4rem;
+    }
+
+
+    /* =========================================================
+       RELATÓRIO PACIENTE  (relatoriopaciente.html)
+       ========================================================= */
+
+    html.pagina-relatorio-paciente .content {
+        padding: 70px 16px 40px !important;
+    }
+
+    html.pagina-relatorio-paciente .page-header h1 {
+        font-size: 1.3rem;
+    }
+
+    html.pagina-relatorio-paciente .report-card {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+
+    html.pagina-relatorio-paciente .report-form {
+        gap: 14px;
+    }
+
+    html.pagina-relatorio-paciente .history-card {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    html.pagina-relatorio-paciente .action {
+        margin-top: 28px;
+    }
+
+    html.pagina-relatorio-paciente .action button,
+    html.pagina-relatorio-paciente .btn-save-report {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+
+
+    /* =========================================================
+       FORMULÁRIO AVALIAÇÃO  (formularioavaliacao1.html)
+       ========================================================= */
+
+    html.pagina-formulario-avaliacao .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-formulario-avaliacao .header-card {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-avaliacao .header-card > img {
+        width: 44px;
+    }
+
+    html.pagina-formulario-avaliacao .header-info h1 {
+        font-size: 22px;
+    }
+
+    html.pagina-formulario-avaliacao .form-section {
+        padding: 18px;
+        margin-bottom: 14px;
+    }
+
+    html.pagina-formulario-avaliacao .form-section h2 {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    html.pagina-formulario-avaliacao .form-grid,
+    html.pagina-formulario-avaliacao .measure-grid,
+    html.pagina-formulario-avaliacao .evolution-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-avaliacao .form-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 24px;
+    }
+
+    html.pagina-formulario-avaliacao .btn-next {
+        width: 100%;
+        justify-content: center;
+        font-size: 16px;
+        padding: 14px 20px;
+    }
+
+    html.pagina-formulario-avaliacao input,
+    html.pagina-formulario-avaliacao select {
+        height: 46px;
+        font-size: 15px;
+    }
+
+
+    /* =========================================================
+       FORMULÁRIO PACIENTE  (paciente.html)
+       ========================================================= */
+
+    html.pagina-formulario-paciente .content {
+        padding: 70px 16px 30px !important;
+    }
+
+    html.pagina-formulario-paciente .header-card {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+    }
+
+    html.pagina-formulario-paciente .header-card > img {
+        width: 36px;
+    }
+
+    html.pagina-formulario-paciente .header-info h1 {
+        font-size: 20px;
+    }
+
+    html.pagina-formulario-paciente .form-card {
+        padding: 18px;
+        margin-bottom: 16px;
+    }
+
+    html.pagina-formulario-paciente .form-card h2 {
+        font-size: 16px;
+        margin-bottom: 18px;
+    }
+
+    html.pagina-formulario-paciente .form-card h3 {
+        font-size: 13px;
+        margin: 18px 0 12px;
+    }
+
+    html.pagina-formulario-paciente .checkbox-grid,
+    html.pagina-formulario-paciente .etiologia-grid,
+    html.pagina-formulario-paciente .medicamentos-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .exam-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .exam-grid.mensuracao-ferida {
+        grid-template-columns: 1fr;
+    }
+
+    html.pagina-formulario-paciente .lifestyle {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .higiene-grid .left-column,
+    html.pagina-formulario-paciente .higiene-grid .right-column {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .nutricao-exam-fields {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .nutricao-exam-fields .field:nth-child(1),
+    html.pagina-formulario-paciente .nutricao-exam-fields .field:nth-child(2) {
+        grid-column: auto;
+    }
+
+    html.pagina-formulario-paciente .exam-fields {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    html.pagina-formulario-paciente .field input {
+        width: 100%;
+        height: 38px;
+    }
+
+    html.pagina-formulario-paciente .field-inline,
+    html.pagina-formulario-paciente .inline-field {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    html.pagina-formulario-paciente .field-inline input,
+    html.pagina-formulario-paciente .inline-field input {
+        width: 100%;
+    }
+
+    html.pagina-formulario-paciente .checkbox-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    html.pagina-formulario-paciente .input-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    html.pagina-formulario-paciente .input-row input {
+        width: 100%;
+    }
+
+    html.pagina-formulario-paciente .photo-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    html.pagina-formulario-paciente .photo-box {
+        width: 100%;
+        max-width: 280px;
+        height: 160px;
+    }
+
+    html.pagina-formulario-paciente .photo-box img {
+        width: 60px;
+        height: 60px;
+    }
+
+    html.pagina-formulario-paciente .action-area button {
+        font-size: 17px;
+        height: 48px;
+    }
+
+    html.pagina-formulario-paciente textarea {
+        font-size: 14px;
+        padding: 12px;
+        min-height: 140px;
+    }
+
+    html.pagina-formulario-paciente .opcoes {
+        gap: 12px 20px;
+    }
+
+    html.pagina-formulario-paciente .body-map {
+        padding: 12px;
+    }
+
+} /* fim @media 430px */
+
+
+/* =========================================================
+   JAVASCRIPT NECESSÁRIO — adicione nos HTMLs com sidebar
+   Copie este script antes do </body> em cada página
+   que tem barra-lateral (paginainicial, cadastropaciente,
+   painelpaciente, configuracoes, relatoriopaciente,
+   formularioavaliacao1, paciente):
+
+<button class="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay"></div>
+<script>
+  const btn = document.querySelector('.hamburger');
+  const sidebar = document.querySelector('.barra-lateral');
+  const overlay = document.querySelector('.sidebar-overlay');
+  function toggleMenu() {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+  }
+  btn.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+</script>
+
+   ========================================================= */
